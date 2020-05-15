@@ -13,6 +13,10 @@
 		7F1F96D2245FCD1B0088C312 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F1F96D1245FCD1B0088C312 /* Assets.xcassets */; };
 		7F1F96D5245FCD1B0088C312 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F1F96D4245FCD1B0088C312 /* Preview Assets.xcassets */; };
 		7F1F96D8245FCD1B0088C312 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F1F96D6245FCD1B0088C312 /* LaunchScreen.storyboard */; };
+		7F1F96E2245FCD7B0088C312 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1F96E1245FCD7B0088C312 /* Country.swift */; };
+		7F1F96E4245FCD980088C312 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1F96E3245FCD980088C312 /* Api.swift */; };
+		7F8E6054246006ED0062F734 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8E6053246006ED0062F734 /* Global.swift */; };
+		7F9BFBDD2465419B009F6099 /* CountryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9BFBDC2465419B009F6099 /* CountryDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +28,10 @@
 		7F1F96D4245FCD1B0088C312 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		7F1F96D7245FCD1B0088C312 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7F1F96D9245FCD1B0088C312 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7F1F96E1245FCD7B0088C312 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
+		7F1F96E3245FCD980088C312 /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
+		7F8E6053246006ED0062F734 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
+		7F9BFBDC2465419B009F6099 /* CountryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,9 +64,12 @@
 		7F1F96CA245FCD180088C312 /* Covid19-Tracker */ = {
 			isa = PBXGroup;
 			children = (
+				7F1F96E0245FCD450088C312 /* Api */,
+				7F1F96DF245FCD370088C312 /* Models */,
 				7F1F96CB245FCD180088C312 /* AppDelegate.swift */,
 				7F1F96CD245FCD180088C312 /* SceneDelegate.swift */,
 				7F1F96CF245FCD180088C312 /* ContentView.swift */,
+				7F9BFBDC2465419B009F6099 /* CountryDetailView.swift */,
 				7F1F96D1245FCD1B0088C312 /* Assets.xcassets */,
 				7F1F96D6245FCD1B0088C312 /* LaunchScreen.storyboard */,
 				7F1F96D9245FCD1B0088C312 /* Info.plist */,
@@ -73,6 +84,23 @@
 				7F1F96D4245FCD1B0088C312 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		7F1F96DF245FCD370088C312 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7F1F96E1245FCD7B0088C312 /* Country.swift */,
+				7F8E6053246006ED0062F734 /* Global.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		7F1F96E0245FCD450088C312 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				7F1F96E3245FCD980088C312 /* Api.swift */,
+			);
+			path = Api;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -146,8 +174,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F1F96E2245FCD7B0088C312 /* Country.swift in Sources */,
 				7F1F96CC245FCD180088C312 /* AppDelegate.swift in Sources */,
+				7F8E6054246006ED0062F734 /* Global.swift in Sources */,
+				7F9BFBDD2465419B009F6099 /* CountryDetailView.swift in Sources */,
 				7F1F96CE245FCD180088C312 /* SceneDelegate.swift in Sources */,
+				7F1F96E4245FCD980088C312 /* Api.swift in Sources */,
 				7F1F96D0245FCD180088C312 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
