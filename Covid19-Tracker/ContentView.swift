@@ -19,84 +19,77 @@ struct ContentView: View {
                     .offset(y: -330)
                 Spacer()
             }
-
+            
             VStack {
-                HStack {
-                    Text("Covid19 Tracker")
-                        .font(.largeTitle)
-                        .fontWeight(.heavy)
-                        .foregroundColor(.white)
-                }
-                .padding(.top, 20)
-                
-                ScrollView() {
-                    VStack(spacing: 50) {
-                        VStack {
-                            Text("Global Statistics")
-                                .font(.title)
-                                .foregroundColor(.white)
-                            
-                            Text(formatDate())
-                                .font(.headline)
-                                .foregroundColor(.white)
-                                .padding(.bottom, 15.0)
-                
-                            HStack {
-                                Text("\(api.globalCases) Cases")
-                                Text("+\(api.globalTodayCases)")
-                                    .font(.caption)
-                                    .foregroundColor(.green)
-                                    .padding(.horizontal, 8)
-                                    .padding(.vertical, 5)
-                                    .background(Color.white)
-                                    .cornerRadius(15)
-                            }
-                            .padding(.bottom, 5)
-                            
-                            HStack {
-                                Text("\(api.globalDeaths) Deaths")
-                                Text("+\(api.globalTodayDeaths)")
-                                    .font(.caption)
-                                    .foregroundColor(.green)
-                                    .padding(.horizontal, 8)
-                                    .padding(.vertical, 5)
-                                    .background(Color.white)
-                                    .cornerRadius(15)
-                                
-                            }
-                            .padding(.bottom, 5)
-                    
-                            Text("\(api.globalRecovered) Recovered")
-                        }
-                
-                        ScrollView(.horizontal) {
-                            HStack(spacing: 30){
-                                Top5CardView(cardTitle: "Countries with the Most Number of Cases", property: "cases", top5: $api.top5Cases)
-                                    .background(Color.white)
-                                    .cornerRadius(20)
-                                Top5CardView(cardTitle: "Countries with the Most Number of Deaths", property: "deaths", top5: $api.top5Deaths)
-                                    .background(Color.white)
-                                    .cornerRadius(20)
-                                Top5CardView(cardTitle: "Countries with the Most Number of Recovered", property: "recovered", top5: $api.top5Recovered)
-                                    .background(Color.white)
-                                    .cornerRadius(20)
-                            }
-                        }
-                        .frame(width: 360)
-                        
-                        VStack(spacing: 15) {
-                            HStack {
-                                Text("Search")
-                                    .font(.title)
-                                Spacer()
-                            }
-                        }
-                        .frame(width: 360)
+                VStack {
+                    HStack {
+                        Text("Global Statistics 🌎")
+                            .font(.largeTitle)
+                            .fontWeight(.heavy)
+                            .foregroundColor(.white)
+                        Spacer()
+                    }
+                    .padding(.top, 35)
+
+                    HStack {
+                        Text("As of \(formatDate())")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .padding(.top, 5)
+                            .padding(.bottom, 15.0)
+                        Spacer()
                     }
                 }
+                .padding(.horizontal, 10)
+                
+                VStack(spacing: 50) {
+                    VStack {
+                        HStack {
+                            Text("\(api.globalCases) Cases")
+                            Text("+\(api.globalTodayCases)")
+                                .font(.caption)
+                                .bold()
+                                .foregroundColor(.green)
+                        }
+                        .padding(.bottom, 5)
+                        
+                        HStack {
+                            Text("\(api.globalDeaths) Deaths")
+                            Text("+\(api.globalTodayDeaths)")
+                                .font(.caption)
+                                .bold()
+                                .foregroundColor(.green)
+                            
+                        }
+                        .padding(.bottom, 5)
+                        
+                        Text("\(api.globalRecovered) Recovered")
+                    }
+                    .padding(20)
+                    .background(Color.white)
+                    .cornerRadius(20)
+                    .shadow(radius: 20)
+      
+                    
+                    ScrollView(.horizontal) {
+                        HStack(spacing: 30){
+                            Top5CardView(cardTitle: "Countries with the Most Number of Cases", property: "cases", top5: $api.top5Cases)
+                                .background(Color.white)
+                                .cornerRadius(20)
+                            Top5CardView(cardTitle: "Countries with the Most Number of Deaths", property: "deaths", top5: $api.top5Deaths)
+                                .background(Color.white)
+                                .cornerRadius(20)
+                            Top5CardView(cardTitle: "Countries with the Most Number of Recovered", property: "recovered", top5: $api.top5Recovered)
+                                .background(Color.white)
+                                .cornerRadius(20)
+                        }
+                    }
+                    
+                }
+                Spacer()
             }
+            .frame(width: 360)
         }
-        .background(Color(red: 0.98, green: 0.98, blue: 0.98).edgesIgnoringSafeArea(.all))
     }
  
     fileprivate func formatDate() -> String {
