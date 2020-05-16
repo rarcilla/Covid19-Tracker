@@ -10,6 +10,7 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var api = Api()
+    @State var currentDateAndTime = Date()
     
     var body: some View {
         ZStack {
@@ -27,6 +28,10 @@ struct ContentView: View {
                             Text("Global Statistics")
                                 .font(.title)
                                 .foregroundColor(Color(red: 1.00, green: 0.27, blue: 0.31))
+                            Text(formatDate())
+                                .font(.headline)
+                                .foregroundColor(Color(red: 0.36, green: 0.36, blue: 0.36))
+                                .padding(.bottom, 10.0)
                             Text("\(api.globalCases) Cases")
                             Text("\(api.globalDeaths) Deaths")
                             Text("\(api.globalRecovered) Recovered")
@@ -78,6 +83,14 @@ struct ContentView: View {
             }
         }
         .background(Color(red: 0.98, green: 0.98, blue: 0.98).edgesIgnoringSafeArea(.all))
+    }
+ 
+    fileprivate func formatDate() -> String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        formatter.timeStyle = .short
+        
+        return formatter.string(from: self.currentDateAndTime)
     }
 }
 
@@ -177,4 +190,3 @@ struct Top5CardViewCell: View {
         }
     }
 }
-
