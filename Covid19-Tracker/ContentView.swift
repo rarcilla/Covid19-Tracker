@@ -15,10 +15,17 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             VStack {
+                Image("blob")
+                    .offset(y: -330)
+                Spacer()
+            }
+
+            VStack {
                 HStack {
                     Text("Covid19 Tracker")
                         .font(.largeTitle)
                         .fontWeight(.heavy)
+                        .foregroundColor(.white)
                 }
                 .padding(.top, 20)
                 
@@ -27,11 +34,11 @@ struct ContentView: View {
                         VStack {
                             Text("Global Statistics")
                                 .font(.title)
-                                .foregroundColor(Color(red: 1.00, green: 0.27, blue: 0.31))
+                                .foregroundColor(.white)
                             
                             Text(formatDate())
                                 .font(.headline)
-                                .foregroundColor(Color(red: 0.36, green: 0.36, blue: 0.36))
+                                .foregroundColor(.white)
                                 .padding(.bottom, 15.0)
                 
                             HStack {
@@ -39,6 +46,10 @@ struct ContentView: View {
                                 Text("+\(api.globalTodayCases)")
                                     .font(.caption)
                                     .foregroundColor(.green)
+                                    .padding(.horizontal, 8)
+                                    .padding(.vertical, 5)
+                                    .background(Color.white)
+                                    .cornerRadius(15)
                             }
                             .padding(.bottom, 5)
                             
@@ -47,6 +58,11 @@ struct ContentView: View {
                                 Text("+\(api.globalTodayDeaths)")
                                     .font(.caption)
                                     .foregroundColor(.green)
+                                    .padding(.horizontal, 8)
+                                    .padding(.vertical, 5)
+                                    .background(Color.white)
+                                    .cornerRadius(15)
+                                
                             }
                             .padding(.bottom, 5)
                     
@@ -70,27 +86,9 @@ struct ContentView: View {
                         
                         VStack(spacing: 15) {
                             HStack {
-                                ContinentCardView(continentName: "Favorites")
+                                Text("Search")
+                                    .font(.title)
                                 Spacer()
-                                ContinentCardView(continentName: "North America")
-                            }
-                            
-                            HStack {
-                                ContinentCardView(continentName: "South America")
-                                Spacer()
-                                ContinentCardView(continentName: "Africa")
-                            }
-                            
-                            HStack {
-                                ContinentCardView(continentName: "Asia")
-                                Spacer()
-                                ContinentCardView(continentName: "Europe")
-                            }
-                            
-                            HStack {
-                                ContinentCardView(continentName: "Australia")
-                                Spacer()
-                                ContinentCardView(continentName: "Antarctica")
                             }
                         }
                         .frame(width: 360)
@@ -114,23 +112,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-    }
-}
-
-struct ContinentCardView: View {
-    var continentName: String
-    
-    var body: some View {
-        VStack {
-            Text(self.continentName)
-                .font(.title)
-                .multilineTextAlignment(.center)
-                .foregroundColor(Color.white)
-        }
-        .frame(width: 170, height: 180)
-        .background(Color(red: 1.00, green: 0.27, blue: 0.31))
-        .cornerRadius(20)
-//        .shadow(radius: 5)
     }
 }
 
