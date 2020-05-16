@@ -134,26 +134,32 @@ struct Top5CardView: View {
             .padding(.horizontal, 20)
             VStack {
                 Top5CardViewCell(rank: 1, countryName: top5.count > 0 ? top5[0].country : "loading...",
-                                 countryNumbers: top5.count > 0 ? top5[0].numbersByPropertyName(name: property) : 0)
+                                 countryNumbers: top5.count > 0 ? top5[0].numbersByPropertyName(name: property) : 0,
+                                 countryFlag: top5.count > 0 ? getFlag(country: top5[0]) : "")
+                
                 FormattedDivider()
-
+                
                 Top5CardViewCell(rank: 2, countryName: top5.count > 0 ? top5[1].country : "loading...",
-                                 countryNumbers: top5.count > 0 ? top5[1].numbersByPropertyName(name: property) : 0)
-
+                                 countryNumbers: top5.count > 0 ? top5[1].numbersByPropertyName(name: property) : 0,
+                                 countryFlag: top5.count > 0 ? getFlag(country: top5[1]) : "")
+                
                 FormattedDivider()
-
+                
                 Top5CardViewCell(rank: 3, countryName: top5.count > 0 ? top5[2].country : "loading...",
-                                 countryNumbers: top5.count > 0 ? top5[2].numbersByPropertyName(name: property) : 0)
-
+                                 countryNumbers: top5.count > 0 ? top5[2].numbersByPropertyName(name: property) : 0,
+                                 countryFlag: top5.count > 0 ? getFlag(country: top5[2]) : "")
+                
                 FormattedDivider()
-
+                
                 Top5CardViewCell(rank: 4, countryName: top5.count > 0 ? top5[3].country : "loading...",
-                                 countryNumbers: top5.count > 0 ? top5[3].numbersByPropertyName(name: property) : 0)
-
+                                 countryNumbers: top5.count > 0 ? top5[3].numbersByPropertyName(name: property) : 0,
+                                 countryFlag: top5.count > 0 ? getFlag(country: top5[3]) : "")
+                
                 FormattedDivider()
-
+                
                 Top5CardViewCell(rank: 5, countryName: top5.count > 0 ? top5[4].country : "loading...",
-                                 countryNumbers: top5.count > 0 ? top5[4].numbersByPropertyName(name: property) : 0)
+                                 countryNumbers: top5.count > 0 ? top5[4].numbersByPropertyName(name: property) : 0,
+                                 countryFlag: top5.count > 0 ? getFlag(country: top5[4]) : "")
             }
             .padding(20)
         }
@@ -162,6 +168,14 @@ struct Top5CardView: View {
         .background(Color(red: 0.27, green: 0.27, blue: 0.27))
         .cornerRadius(20)
     }
+}
+
+    fileprivate func getFlag(country: Country) -> String {
+        var flag = ""
+        if let iso3 = country.countryInfo.iso3 {
+            flag = IsoCountryCodes.find(key: iso3)?.flag ?? ""
+        }
+        return flag
 }
 
 struct FormattedDivider: View {
@@ -179,12 +193,13 @@ struct Top5CardViewCell: View {
     var rank: Int
     var countryName: String
     var countryNumbers: Int
+    var countryFlag: String
     
     var body: some View {
         HStack {
             Text(String(self.rank))
                 .fontWeight(.bold)
-            Text(self.countryName)
+            Text("\(self.countryName) \(self.countryFlag)")
             Spacer()
             Text("\(self.countryNumbers)")
         }

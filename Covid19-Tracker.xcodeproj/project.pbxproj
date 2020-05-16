@@ -17,6 +17,8 @@
 		7F1F96E4245FCD980088C312 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1F96E3245FCD980088C312 /* Api.swift */; };
 		7F8E6054246006ED0062F734 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8E6053246006ED0062F734 /* Global.swift */; };
 		7F9BFBDD2465419B009F6099 /* CountryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9BFBDC2465419B009F6099 /* CountryDetailView.swift */; };
+		7FCB0779246F934F0013A143 /* IsoCountries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCB0778246F934F0013A143 /* IsoCountries.swift */; };
+		7FCB077B246F93680013A143 /* IsoCountryCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCB077A246F93680013A143 /* IsoCountryCodes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		7F1F96E3245FCD980088C312 /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
 		7F8E6053246006ED0062F734 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		7F9BFBDC2465419B009F6099 /* CountryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryDetailView.swift; sourceTree = "<group>"; };
+		7FCB0778246F934F0013A143 /* IsoCountries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsoCountries.swift; sourceTree = "<group>"; };
+		7FCB077A246F93680013A143 /* IsoCountryCodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsoCountryCodes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +78,7 @@
 				7F1F96D6245FCD1B0088C312 /* LaunchScreen.storyboard */,
 				7F1F96D9245FCD1B0088C312 /* Info.plist */,
 				7F1F96D3245FCD1B0088C312 /* Preview Content */,
+				7FCB077C246F937F0013A143 /* IsoCountryCodes Library */,
 			);
 			path = "Covid19-Tracker";
 			sourceTree = "<group>";
@@ -101,6 +106,15 @@
 				7F1F96E3245FCD980088C312 /* Api.swift */,
 			);
 			path = Api;
+			sourceTree = "<group>";
+		};
+		7FCB077C246F937F0013A143 /* IsoCountryCodes Library */ = {
+			isa = PBXGroup;
+			children = (
+				7FCB0778246F934F0013A143 /* IsoCountries.swift */,
+				7FCB077A246F93680013A143 /* IsoCountryCodes.swift */,
+			);
+			path = "IsoCountryCodes Library";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -176,8 +190,10 @@
 			files = (
 				7F1F96E2245FCD7B0088C312 /* Country.swift in Sources */,
 				7F1F96CC245FCD180088C312 /* AppDelegate.swift in Sources */,
+				7FCB077B246F93680013A143 /* IsoCountryCodes.swift in Sources */,
 				7F8E6054246006ED0062F734 /* Global.swift in Sources */,
 				7F9BFBDD2465419B009F6099 /* CountryDetailView.swift in Sources */,
+				7FCB0779246F934F0013A143 /* IsoCountries.swift in Sources */,
 				7F1F96CE245FCD180088C312 /* SceneDelegate.swift in Sources */,
 				7F1F96E4245FCD980088C312 /* Api.swift in Sources */,
 				7F1F96D0245FCD180088C312 /* ContentView.swift in Sources */,
