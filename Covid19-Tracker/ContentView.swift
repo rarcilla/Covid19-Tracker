@@ -28,12 +28,28 @@ struct ContentView: View {
                             Text("Global Statistics")
                                 .font(.title)
                                 .foregroundColor(Color(red: 1.00, green: 0.27, blue: 0.31))
+                            
                             Text(formatDate())
                                 .font(.headline)
                                 .foregroundColor(Color(red: 0.36, green: 0.36, blue: 0.36))
-                                .padding(.bottom, 10.0)
-                            Text("\(api.globalCases) Cases")
-                            Text("\(api.globalDeaths) Deaths")
+                                .padding(.bottom, 15.0)
+                
+                            HStack {
+                                Text("\(api.globalCases) Cases")
+                                Text("+\(api.globalTodayCases)")
+                                    .font(.caption)
+                                    .foregroundColor(.green)
+                            }
+                            .padding(.bottom, 5)
+                            
+                            HStack {
+                                Text("\(api.globalDeaths) Deaths")
+                                Text("+\(api.globalTodayDeaths)")
+                                    .font(.caption)
+                                    .foregroundColor(.green)
+                            }
+                            .padding(.bottom, 5)
+                    
                             Text("\(api.globalRecovered) Recovered")
                         }
                 

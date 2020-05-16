@@ -16,6 +16,11 @@ class Api: ObservableObject {
     @Published var globalCases = 0
     @Published var globalDeaths = 0
     @Published var globalRecovered = 0
+    
+    @Published var globalTodayCases = 0
+    @Published var globalTodayDeaths = 0
+    
+    
     @Published var top5Cases: [Country] = [Country]()
     @Published var top5Deaths: [Country] = [Country]()
     @Published var top5Recovered: [Country] = [Country]()
@@ -26,6 +31,9 @@ class Api: ObservableObject {
                 self.globalCases = self.global!.cases
                 self.globalDeaths = self.global!.deaths
                 self.globalRecovered = self.global!.recovered
+                
+                self.globalTodayCases = self.global!.todayCases
+                self.globalTodayDeaths = self.global!.todayDeaths
             }
         }
 
