@@ -12,13 +12,13 @@ struct Country: Codable {
     
     var country: String
     var countryInfo: CountryInfo
-    var cases: Int
-    var todayCases: Int
-    var deaths: Int
-    var todayDeaths: Int
-    var recovered: Int
-    var active: Int
-    var critical: Int
+    var cases: Int?
+    var todayCases: Int?
+    var deaths: Int?
+    var todayDeaths: Int?
+    var recovered: Int?
+    var active: Int?
+    var critical: Int?
 //    var continent: String
 
     struct CountryInfo: Codable {
@@ -40,19 +40,19 @@ struct Country: Codable {
     func numbersByPropertyName(name: String) -> Int {
         switch name {
             case "cases":
-                return cases
+                return cases ?? 0
             case "todayCases":
-                return todayCases
+                return todayCases ?? 0
             case "deaths":
-                return deaths
+                return deaths ?? 0
             case "todayDeaths":
-                return todayDeaths
+                return todayDeaths ?? 0
             case "recovered":
-                return recovered
+                return recovered ?? 0
             case "active":
-                return active
+                return active ?? 0
             case "critical":
-                return critical
+                return critical ?? 0
             default:
                 fatalError("Could not access property name")
         }

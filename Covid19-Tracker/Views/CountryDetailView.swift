@@ -9,6 +9,8 @@
 import SwiftUI
 
 struct CountryDetailView: View {
+    @ObservedObject var api = Api()
+    
     var body: some View {
         VStack {
             Text("Canada")
@@ -22,3 +24,5 @@ struct CountryDetailView_Previews: PreviewProvider {
         CountryDetailView()
     }
 }
+
+

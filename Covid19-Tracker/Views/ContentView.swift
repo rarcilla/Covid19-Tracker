@@ -84,7 +84,6 @@ struct ContentView: View {
                                 .cornerRadius(20)
                         }
                     }
-                    
                 }
                 Spacer()
             }
@@ -195,3 +194,6 @@ struct Top5CardViewCell: View {
         }
     }
 }
+
+
+
