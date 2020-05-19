@@ -180,7 +180,7 @@ class Api: ObservableObject {
     //precondition: tuples are organized by date
     func processHistory(array: [(String, Int)]) -> [(String, Int)] {
         var processedResult = [(String, Int)]()
-        guard globalHistory7!.count > 0 else { return processedResult }
+        guard array.count > 0 else { return processedResult }
         
         for index in 0...array.count - 1 {
             if index == 0 {
