@@ -10,7 +10,8 @@ import SwiftUI
 import Charts
 
 struct ContentView: View {
-    @ObservedObject var api = Api()
+//    @ObservedObject var api = Api()
+    @EnvironmentObject var api: Api
     @State var currentDateAndTime = Date()
     
     var body: some View {

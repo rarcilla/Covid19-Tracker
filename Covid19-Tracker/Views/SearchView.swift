@@ -9,13 +9,12 @@
 import SwiftUI
 
 struct SearchView: View {
-//    var api: Api
+    @EnvironmentObject var api: Api
     
     var body: some View {
-        Text("hello")
-//        return List(countries) { country in
-//            CountryRow(country: country)
-//        }
+        return List(api.countries) { country in
+            CountryRow(country: country)
+        }
     }
 }
 

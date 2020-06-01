@@ -12,7 +12,7 @@ import Combine
 class Api: ObservableObject {
     private var baseUrlStr = "https://disease.sh/v2/"
     var global: Global?
-    var countries: [Country]?
+    var countries = [Country]()
     var globalHistory: [String: [String:Int]]?
     @Published var globalCases = 0
     @Published var globalDeaths = 0
@@ -161,18 +161,21 @@ class Api: ObservableObject {
     }
     
     func getTop5Cases() {
-        let orderedCases = self.countries?.sorted(by: {$0.cases ?? 0 > $1.cases ?? 0})
-        self.top5Cases = Array((orderedCases?.prefix(5))!)
+        let orderedCases = self.countries.sorted(by: {$0.cases ?? 0 > $1.cases ?? 0})
+        guard orderedCases.count > 0 else { fatalError("countries array is empty")}
+        self.top5Cases = Array((orderedCases.prefix(5)))
     }
     
     func getTop5Deaths() {
-        let orderedDeaths = self.countries?.sorted(by: {$0.deaths ?? 0 > $1.deaths ?? 0})
-        self.top5Deaths = Array((orderedDeaths?.prefix(5))!)
+        let orderedDeaths = self.countries.sorted(by: {$0.deaths ?? 0 > $1.deaths ?? 0})
+        guard orderedDeaths.count > 0 else { fatalError("countries array is empty")}
+        self.top5Deaths = Array((orderedDeaths.prefix(5)))
     }
     
     func getTop5Recovered() {
-        let orderedRecovered = self.countries?.sorted(by: {$0.recovered ?? 0 > $1.recovered ?? 0})
-        self.top5Recovered = Array((orderedRecovered?.prefix(5))!)
+        let orderedRecovered = self.countries.sorted(by: {$0.recovered ?? 0 > $1.recovered ?? 0})
+        guard orderedRecovered.count > 0 else { fatalError("countries array is empty")}
+        self.top5Recovered = Array((orderedRecovered.prefix(5)))
     }
     
     //precondition: tuples are organized by date

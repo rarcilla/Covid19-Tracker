@@ -9,7 +9,8 @@
 import SwiftUI
 
 struct AppView: View {
-//    var api: Api
+//    @ObservedObject var api: Api
+    @EnvironmentObject var api: Api
     @State var selected = 0
     
     var body: some View {
