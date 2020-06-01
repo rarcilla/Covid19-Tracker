@@ -13,8 +13,45 @@ struct CountryDetailView: View {
     
     var body: some View {
         VStack {
-            Text("Canada")
-                .font(.largeTitle)
+            HStack {
+                Text("Canada 🇨🇦")
+                    .font(.largeTitle)
+                    .fontWeight(.semibold)
+                    .padding(.vertical)
+                    .padding(.horizontal, 30)
+                Spacer()
+            }
+            HStack {
+                Spacer()
+                VStack {
+                    Text("1000")
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .foregroundColor(Color.orange)
+                    Text("cases")
+                        .font(.headline)
+                }
+                Spacer()
+                VStack {
+                    Text("1000")
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .foregroundColor(Color.red)
+                    Text("deaths")
+                        .font(.headline)
+                }
+                Spacer()
+                VStack {
+                    Text("1000")
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .foregroundColor(Color.blue)
+                    Text("recovered")
+                        .font(.headline)
+                }
+                Spacer()
+            }
+            Spacer()
         }
     }
 }

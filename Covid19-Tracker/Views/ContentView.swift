@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Charts
 
 struct ContentView: View {
     @ObservedObject var api = Api()
@@ -85,7 +86,6 @@ struct ContentView: View {
                         }
                     }
                 }
-                Spacer()
             }
             .frame(width: 360)
         }
@@ -122,31 +122,31 @@ struct Top5CardView: View {
             .padding(.top, 20)
             .padding(.horizontal, 20)
             VStack {
-                Top5CardViewCell(rank: 1, countryName: top5.count > 0 ? top5[0].country : "loading...",
+                Top5CardViewCell(rank: 1, countryName: top5.count > 0 ? top5[0].countryName : "loading...",
                                  countryNumbers: top5.count > 0 ? top5[0].numbersByPropertyName(name: property) : 0,
                                  countryFlag: top5.count > 0 ? getFlag(country: top5[0]) : "")
                 
                 FormattedDivider()
                 
-                Top5CardViewCell(rank: 2, countryName: top5.count > 0 ? top5[1].country : "loading...",
+                Top5CardViewCell(rank: 2, countryName: top5.count > 0 ? top5[1].countryName : "loading...",
                                  countryNumbers: top5.count > 0 ? top5[1].numbersByPropertyName(name: property) : 0,
                                  countryFlag: top5.count > 0 ? getFlag(country: top5[1]) : "")
                 
                 FormattedDivider()
                 
-                Top5CardViewCell(rank: 3, countryName: top5.count > 0 ? top5[2].country : "loading...",
+                Top5CardViewCell(rank: 3, countryName: top5.count > 0 ? top5[2].countryName : "loading...",
                                  countryNumbers: top5.count > 0 ? top5[2].numbersByPropertyName(name: property) : 0,
                                  countryFlag: top5.count > 0 ? getFlag(country: top5[2]) : "")
                 
                 FormattedDivider()
                 
-                Top5CardViewCell(rank: 4, countryName: top5.count > 0 ? top5[3].country : "loading...",
+                Top5CardViewCell(rank: 4, countryName: top5.count > 0 ? top5[3].countryName : "loading...",
                                  countryNumbers: top5.count > 0 ? top5[3].numbersByPropertyName(name: property) : 0,
                                  countryFlag: top5.count > 0 ? getFlag(country: top5[3]) : "")
                 
                 FormattedDivider()
                 
-                Top5CardViewCell(rank: 5, countryName: top5.count > 0 ? top5[4].country : "loading...",
+                Top5CardViewCell(rank: 5, countryName: top5.count > 0 ? top5[4].countryName : "loading...",
                                  countryNumbers: top5.count > 0 ? top5[4].numbersByPropertyName(name: property) : 0,
                                  countryFlag: top5.count > 0 ? getFlag(country: top5[4]) : "")
             }

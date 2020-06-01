@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct AppView: View {
+//    var api: Api
     @State var selected = 0
     
     var body: some View {
@@ -27,7 +28,7 @@ struct AppView: View {
                     Text("Home")
             }
             .tag(1)
-            .padding(.top, 35)
+            .padding(.top, 50)
             
             FavoritesView()
                 .tabItem {

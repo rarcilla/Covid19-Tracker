@@ -9,8 +9,13 @@
 import SwiftUI
 
 struct SearchView: View {
+//    var api: Api
+    
     var body: some View {
-        Text("Search View")
+        Text("hello")
+//        return List(countries) { country in
+//            CountryRow(country: country)
+//        }
     }
 }
 
@@ -19,3 +24,12 @@ struct SearchView_Previews: PreviewProvider {
         SearchView()
     }
 }
+
+struct CountryRow: View {
+    var country: Country
+
+    var body: some View {
+        Text("\(country.countryName)")
+    }
+}
+

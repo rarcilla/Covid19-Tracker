@@ -8,9 +8,9 @@
 
 import Foundation
 
-struct Country: Codable {
-    
-    var country: String
+struct Country: Codable, Identifiable {
+    var id = UUID()
+    var countryName: String
     var countryInfo: CountryInfo
     var cases: Int?
     var todayCases: Int?
@@ -19,17 +19,28 @@ struct Country: Codable {
     var recovered: Int?
     var active: Int?
     var critical: Int?
-//    var continent: String
+    
+    enum CodingKeys: String, CodingKey {
+        case countryName = "country"
+        case countryInfo
+        case cases
+        case todayCases
+        case deaths
+        case todayDeaths
+        case recovered
+        case active
+        case critical
+    }
 
     struct CountryInfo: Codable {
-        var id: Int?
+        var countryInfoID: Int?
         var iso3: String?
         var lat: Double
         var long: Double
         var flag: String
         
         enum CodingKeys: String, CodingKey {
-            case id = "_id"
+            case countryInfoID = "_id"
             case iso3 = "iso3"
             case lat = "lat"
             case long = "long"
