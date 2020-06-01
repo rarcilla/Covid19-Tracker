@@ -12,8 +12,9 @@ struct SearchView: View {
     @EnvironmentObject var api: Api
     
     var body: some View {
-        return List(api.countries) { country in
-            CountryRow(country: country)
+        NavigationView {
+            List(api.countries, rowContent: CountryRow.init)
+            .navigationBarTitle(Text("Browse Countries"))
         }
     }
 }
@@ -28,7 +29,7 @@ struct CountryRow: View {
     var country: Country
 
     var body: some View {
-        Text("\(country.countryName)")
+        Text("\(country.countryName) \(getFlag(country: country))")
     }
 }
 

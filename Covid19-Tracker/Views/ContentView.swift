@@ -160,13 +160,13 @@ struct Top5CardView: View {
     }
 }
 
-    fileprivate func getFlag(country: Country) -> String {
-        var flag = ""
-        if let iso3 = country.countryInfo.iso3 {
-            flag = IsoCountryCodes.find(key: iso3)?.flag ?? ""
-        }
-        return flag
-}
+//fileprivate func getFlag(country: Country) -> String {
+//    var flag = ""
+//    if let iso3 = country.countryInfo.iso3 {
+//        flag = IsoCountryCodes.find(key: iso3)?.flag ?? ""
+//    }
+//    return flag
+//}
 
 struct FormattedDivider: View {
     var body: some View {

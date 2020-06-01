@@ -19,6 +19,7 @@
 		7F4587432477606D0049144F /* DateValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4587422477606D0049144F /* DateValueFormatter.swift */; };
 		7F8E6054246006ED0062F734 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8E6053246006ED0062F734 /* Global.swift */; };
 		7F9BFBDD2465419B009F6099 /* CountryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9BFBDC2465419B009F6099 /* CountryDetailView.swift */; };
+		7FB6660824859A07007572A7 /* Flag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB6660724859A07007572A7 /* Flag.swift */; };
 		7FCB0779246F934F0013A143 /* IsoCountries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCB0778246F934F0013A143 /* IsoCountries.swift */; };
 		7FCB077B246F93680013A143 /* IsoCountryCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCB077A246F93680013A143 /* IsoCountryCodes.swift */; };
 		7FFA9E292473544000507C6D /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FFA9E282473544000507C6D /* AppView.swift */; };
@@ -42,6 +43,7 @@
 		7F4587422477606D0049144F /* DateValueFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateValueFormatter.swift; sourceTree = "<group>"; };
 		7F8E6053246006ED0062F734 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		7F9BFBDC2465419B009F6099 /* CountryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryDetailView.swift; sourceTree = "<group>"; };
+		7FB6660724859A07007572A7 /* Flag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flag.swift; sourceTree = "<group>"; };
 		7FCB0778246F934F0013A143 /* IsoCountries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsoCountries.swift; sourceTree = "<group>"; };
 		7FCB077A246F93680013A143 /* IsoCountryCodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsoCountryCodes.swift; sourceTree = "<group>"; };
 		7FFA9E282473544000507C6D /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				7F4587422477606D0049144F /* DateValueFormatter.swift */,
+				7FB6660724859A07007572A7 /* Flag.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -300,6 +303,7 @@
 				7F1F96CE245FCD180088C312 /* SceneDelegate.swift in Sources */,
 				7F1F96E4245FCD980088C312 /* Api.swift in Sources */,
 				7FFA9E292473544000507C6D /* AppView.swift in Sources */,
+				7FB6660824859A07007572A7 /* Flag.swift in Sources */,
 				7F1F96D0245FCD180088C312 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
