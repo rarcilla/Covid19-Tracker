@@ -13,7 +13,11 @@ class Api: ObservableObject {
     private var baseUrlStr = "https://disease.sh/v2/"
     var global: Global?
     @Published var countries = [Country]()
+    var newsFeed: NewsFeed?
+    @Published var articles = [NewsFeed.Article]()
     var globalHistory: [String: [String:Int]]?
+    var countryHistory: [String : Any]?
+    
     @Published var globalCases = 0
     @Published var globalDeaths = 0
     @Published var globalRecovered = 0
@@ -26,10 +30,10 @@ class Api: ObservableObject {
     @Published var top5Deaths: [Country] = [Country]()
     @Published var top5Recovered: [Country] = [Country]()
     
-    @Published var globalHistoryCases: [(String, Int)] = []
-    @Published var globalHistoryDeaths: [(String, Int)] = []
-    @Published var globalHistoryRecovered: [(String, Int)] = []
-    @Published var cases: [(Date, Int)] = []
+    @Published var globalHistoryCases: [(String, Double)] = []
+    @Published var globalHistoryDeaths: [(String, Double)] = []
+    @Published var globalHistoryRecovered: [(String, Double)] = []
+//    @Published var cases: [(Date, Int)] = []
         
     init() {
         getGlobal {
@@ -42,7 +46,7 @@ class Api: ObservableObject {
                 self.globalTodayDeaths = self.global!.todayDeaths
             }
         }
-
+        
         getAllCountries {
             DispatchQueue.main.async {
                 self.getTop5Cases()
@@ -51,14 +55,26 @@ class Api: ObservableObject {
             }
         }
         
-        getGlobalHistory(numberOfDays: 7) {
-            //save to variables
+        getNewsArticles {
+            DispatchQueue.main.async {
+                self.articles = self.newsFeed!.articles!
+                print(self.articles)
+            }
         }
+    
+        
+//        getGlobalHistory(numberOfDays: 7) {
+//            DispatchQueue.main.async {
+//                self.globalHistoryCases = self.tuplesOrderedByDate(dict: self.globalHistory!["cases"], completionHandler: self.processHistory)
+//            }
+//        }
+        
+        
     }
     
-    func tuplesOrderedByDate(dict: [String: Int]?) -> [(String, Int)] {
+        func tuplesOrderedByDate(dict: [String: Int]?, completionHandler: ([(String, Int)]) -> [(String, Double)]) -> [(String, Double)] {
         var tupleArray = [(String, Int)]()
-        
+
         if let dict = dict {
             tupleArray = dict.map{$0}.sorted {
                 guard let date1 = toDate(str: $0.0), let date2 = toDate(str: $1.0) else {
@@ -67,24 +83,24 @@ class Api: ObservableObject {
                 return date1 < date2
             }
         }
-        
-        return tupleArray
+
+        return completionHandler(tupleArray)
     }
     
-    func orderedTuples(dict: [String: Int]?, completionHandler: ([(Date, Int)]) -> [(Date, Int)])  -> [(Date, Int)] {
-        var tupleArray = [(Date, Int)]()
-        
-        if let dict = dict {
-            tupleArray = dict.map{$0}.map {
-                guard let date = toDate(str: $0.0) else {
-                    fatalError("could not convert string to date")
-                }
-                return (date, $0.1)
-            }.sorted(by: {$0.0 < $1.0})
-        }
-        
-        return processHistory(array: tupleArray)
-    }
+//    func orderedTuples(dict: [String: Int]?, completionHandler: ([(Date, Int)]) -> [(Date, Int)])  -> [(Date, Int)] {
+//        var tupleArray = [(Date, Int)]()
+//
+//        if let dict = dict {
+//            tupleArray = dict.map{$0}.map {
+//                guard let date = toDate(str: $0.0) else {
+//                    fatalError("could not convert string to date")
+//                }
+//                return (date, $0.1)
+//            }.sorted(by: {$0.0 < $1.0})
+//        }
+//
+//        return completionHandler(tupleArray)
+//    }
     
     //get global summary
     func getGlobal(completionHandler: @escaping () -> Void){
@@ -151,7 +167,7 @@ class Api: ObservableObject {
                         self.globalHistory = json
                     }
                 } catch {
-                    print("Error parsing history")
+                    print("Error parsing global history")
                 }
                 completionHandler()
             }
@@ -178,39 +194,109 @@ class Api: ObservableObject {
         self.top5Recovered = Array((orderedRecovered.prefix(5)))
     }
     
-    //precondition: tuples are organized by date
-    //finds number of new cases/deaths/recovered
-    func processHistory1(array: [(String, Int)]) -> [(String, Int)] {
-        var processedResult = [(String, Int)]()
-        guard array.count > 0 else { return processedResult }
-
-        for index in 0...array.count - 1 {
-            if index == 0 {
-                processedResult.append((array[index].0, array[index].1))
-            } else {
-                let new = array[index].1 - array[index - 1].1
-                processedResult.append((array[index].0, new))
-            }
-        }
-//        print(processedResult)
-        return processedResult
-    }
-    
-    func processHistory(array: [(Date, Int)]) -> [(Date, Int)] {
-        var processedResult = [(Date, Int)]()
+    //precondition: tuples are ordered according to date
+    func processHistory(array: [(String, Int)]) -> [(String, Double)] {
+        var processedResult = [(String, Double)]()
         guard array.count > 0 else { return processedResult }
         
         for index in 0...array.count - 1 {
             if index == 0 {
-                processedResult.append((array[index].0, array[index].1))
+                processedResult.append((array[index].0, Double(array[index].1)))
             } else {
-                let new = array[index].1 - array[index - 1].1
+                let new = Double(array[index].1 - array[index - 1].1)
                 processedResult.append((array[index].0, new))
             }
         }
         return processedResult
     }
+    
+    func getNewsArticles(completionHandler: @escaping () -> Void) {
+        let urlString = "https://newsapi.org/v2/top-headlines?q=covid-19&apiKey=\(newsApiKey)"
+        
+        let url = URL(string: urlString)
+        
+        guard url != nil else {
+            return
+        }
+        
+        let session = URLSession.shared
+        
+        let dataTask = session.dataTask(with: url!, completionHandler: { (data, response, error) in
+            if error == nil && data != nil {
+                let decoder = JSONDecoder()
+                do {
+                    self.newsFeed = try decoder.decode(NewsFeed.self, from: data!)
+                } catch {
+                    print(error)
+                    fatalError("error: failed to parse news articles")
+                }
+                completionHandler()
+            }
+        })
+        
+        dataTask.resume()
+    }
+    
+//    func getCountryHistory(iso: String) {
+//        let url = URL(string: baseUrlStr + "historical/\(iso)?lastdays=7")
+//
+//        guard url != nil else {
+//            return
+//        }
+//
+//        let session = URLSession.shared
+//
+//        let dataTask = session.dataTask(with: url!) { (data, response, error) in
+//            if data != nil && error == nil {
+//
+//                do {
+//                    if let json = try JSONSerialization.jsonObject(with: data!, options: []) as? [String: [String:Int]] {
+//                        self.countryHistory = json
+//                    }
+//                } catch {
+//                    print("Error parsing country history")
+//                }
+////                completionHandler()
+//            }
+//        }
+//
+//        dataTask.resume()
+//    }
 }
+    
+    //precondition: tuples are organized by date
+    //finds number of new cases/deaths/recovered
+//    func processHistory1(array: [(String, Int)]) -> [(String, Int)] {
+//        var processedResult = [(String, Int)]()
+//        guard array.count > 0 else { return processedResult }
+//
+//        for index in 0...array.count - 1 {
+//            if index == 0 {
+//                processedResult.append((array[index].0, array[index].1))
+//            } else {
+//                let new = array[index].1 - array[index - 1].1
+//                processedResult.append((array[index].0, new))
+//            }
+//        }
+////        print(processedResult)
+//        return processedResult
+//    }
+    
+//    func processHistory(array: [(Date, Int)]) -> [(Date, Int)] {
+//        var processedResult = [(Date, Int)]()
+//        guard array.count > 0 else { return processedResult }
+//
+//        for index in 0...array.count - 1 {
+//            if index == 0 {
+//                processedResult.append((array[index].0, array[index].1))
+//            } else {
+//                let new = array[index].1 - array[index - 1].1
+//                processedResult.append((array[index].0, new))
+//            }
+//        }
+//        return processedResult
+//    }
+    
 
 extension Api {
     func toDate(str: String) -> Date? {

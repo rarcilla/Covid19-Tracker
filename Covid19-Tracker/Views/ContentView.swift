@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-import Charts
 
 struct ContentView: View {
     @EnvironmentObject var api: Api
@@ -155,14 +154,6 @@ struct Top5CardView: View {
         .cornerRadius(20)
     }
 }
-
-//fileprivate func getFlag(country: Country) -> String {
-//    var flag = ""
-//    if let iso3 = country.countryInfo.iso3 {
-//        flag = IsoCountryCodes.find(key: iso3)?.flag ?? ""
-//    }
-//    return flag
-//}
 
 struct FormattedDivider: View {
     var body: some View {

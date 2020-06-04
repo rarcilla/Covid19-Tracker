@@ -13,12 +13,16 @@ struct CountryDetailView: View {
     @EnvironmentObject var userData: UserData
 
     var country: Country
-    
     var countryIndex: Int {
         self.api.countries.firstIndex(where: {
             $0.id == country.id
         })!
     }
+
+//    init(country: Country) {
+//        self.country = country
+//        self.api.getCountryHistory(iso: self.country.countryInfo.iso3!)
+//    }
     
     var body: some View {
         VStack {
@@ -37,13 +41,13 @@ struct CountryDetailView: View {
                     self.api.countries[self.countryIndex].isFavorite.toggle()
                 }) {
                     if self.api.countries[self.countryIndex].isFavorite {
-                        Image(systemName: "heart.fill")
+                        Image(systemName: "star.fill")
                             .font(.title)
-                            .foregroundColor(.pink)
+                            .foregroundColor(Color(red: 1.00, green: 0.27, blue: 0.31))
                     } else {
-                        Image(systemName: "heart")
+                        Image(systemName: "star")
                             .font(.title)
-                            .foregroundColor(.pink)
+                            .foregroundColor(Color(red: 1.00, green: 0.27, blue: 0.31))
                     }
                 }
                     .padding(.trailing, 30)

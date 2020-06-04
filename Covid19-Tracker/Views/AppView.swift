@@ -9,23 +9,31 @@
 import SwiftUI
 
 struct AppView: View {
-    @State var selected = 0
+    @State var selected = 1
     
     var body: some View {
         TabView(selection: $selected) {
-            ContentView()
-                .tabItem {
-                    selected == 1 ? Image(systemName: "house.fill") : Image(systemName:"house")
-                    Text("Home")
-            }
-            .tag(0)
-            
             SearchView()
                 .tabItem {
                     selected == 0 ? Image(systemName: "magnifyingglass.circle.fill") : Image(systemName:"magnifyingglass.circle")
                     Text("Search")
             }
+            .tag(0)
+            
+            ContentView()
+                .tabItem {
+                    selected == 1 ? Image(systemName: "house.fill") : Image(systemName:"house")
+                    Text("Home")
+            }
             .tag(1)
+            
+            
+            NewsView()
+                .tabItem {
+                    selected == 2 ? Image(systemName: "book.fill") : Image(systemName:"book")
+                    Text("News")
+            }
+            .tag(2)
             
         }
         .accentColor(Color(red: 1.00, green: 0.27, blue: 0.31))

@@ -2,3 +2,4 @@ xcuserdata/
 build/
 DerivedData/
 *.pbxuser
+Constants.swift
