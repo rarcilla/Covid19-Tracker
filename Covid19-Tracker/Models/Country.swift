@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct Country: Codable, Identifiable {
     var id = UUID()
@@ -19,6 +20,7 @@ struct Country: Codable, Identifiable {
     var recovered: Int?
     var active: Int?
     var critical: Int?
+    var isFavorite: Bool = false
     
     enum CodingKeys: String, CodingKey {
         case countryName = "country"

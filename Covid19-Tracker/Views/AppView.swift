@@ -9,41 +9,37 @@
 import SwiftUI
 
 struct AppView: View {
-//    @ObservedObject var api: Api
-    @EnvironmentObject var api: Api
     @State var selected = 0
     
     var body: some View {
         TabView(selection: $selected) {
+            ContentView()
+                .tabItem {
+                    selected == 1 ? Image(systemName: "house.fill") : Image(systemName:"house")
+                    Text("Home")
+            }
+            .tag(0)
             
             SearchView()
                 .tabItem {
                     selected == 0 ? Image(systemName: "magnifyingglass.circle.fill") : Image(systemName:"magnifyingglass.circle")
                     Text("Search")
             }
-            .tag(0)
-            
-            ContentView()
-                .tabItem {
-                    selected == 1 ? Image(systemName: "house.fill") : Image(systemName:"house")
-                    Text("Home")
-            }
             .tag(1)
-            .padding(.top, 50)
             
-            FavoritesView()
-                .tabItem {
-                    selected == 2 ? Image(systemName: "heart.fill") : Image(systemName:"heart")
-                    Text("Favorites")
-            }
-            .tag(2)
         }
         .accentColor(Color(red: 1.00, green: 0.27, blue: 0.31))
     }
 }
 
+//struct AppView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        AppView().environmentObject(Api()).environmentObject(UserData())
+//    }
+//}
+
 struct AppView_Previews: PreviewProvider {
     static var previews: some View {
-        AppView()
+        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
     }
 }

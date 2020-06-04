@@ -10,7 +10,6 @@ import SwiftUI
 import Charts
 
 struct ContentView: View {
-//    @ObservedObject var api = Api()
     @EnvironmentObject var api: Api
     @State var currentDateAndTime = Date()
     
@@ -22,7 +21,7 @@ struct ContentView: View {
                 Spacer()
             }
             
-            VStack {
+            VStack(spacing: 50) {
                 VStack {
                     HStack {
                         Text("Global Statistics 🌎")
@@ -31,8 +30,6 @@ struct ContentView: View {
                             .foregroundColor(.white)
                         Spacer()
                     }
-                    .padding(.top, 35)
-
                     HStack {
                         Text("As of \(formatDate())")
                             .font(.headline)
@@ -42,51 +39,49 @@ struct ContentView: View {
                         Spacer()
                     }
                 }
-                .padding(.horizontal, 10)
+                .padding(.top, 80)
                 
-                VStack(spacing: 50) {
-                    VStack {
-                        HStack {
-                            Text("\(api.globalCases) Cases")
-                            Text("+\(api.globalTodayCases)")
-                                .font(.caption)
-                                .bold()
-                                .foregroundColor(.green)
-                        }
-                        .padding(.bottom, 5)
-                        
-                        HStack {
-                            Text("\(api.globalDeaths) Deaths")
-                            Text("+\(api.globalTodayDeaths)")
-                                .font(.caption)
-                                .bold()
-                                .foregroundColor(.green)
-                            
-                        }
-                        .padding(.bottom, 5)
-                        
-                        Text("\(api.globalRecovered) Recovered")
+                VStack {
+                    HStack {
+                        Text("\(api.globalCases) Cases")
+                        Text("+\(api.globalTodayCases)")
+                            .font(.caption)
+                            .bold()
+                            .foregroundColor(.green)
                     }
-                    .padding(20)
-                    .background(Color.white)
-                    .cornerRadius(20)
-                    .shadow(radius: 20)
-      
+                    .padding(.bottom, 5)
                     
-                    ScrollView(.horizontal) {
-                        HStack(spacing: 30){
-                            Top5CardView(cardTitle: "Countries with the Most Number of Cases", property: "cases", top5: $api.top5Cases)
-                                .background(Color.white)
-                                .cornerRadius(20)
-                            Top5CardView(cardTitle: "Countries with the Most Number of Deaths", property: "deaths", top5: $api.top5Deaths)
-                                .background(Color.white)
-                                .cornerRadius(20)
-                            Top5CardView(cardTitle: "Countries with the Most Number of Recovered", property: "recovered", top5: $api.top5Recovered)
-                                .background(Color.white)
-                                .cornerRadius(20)
-                        }
+                    HStack {
+                        Text("\(api.globalDeaths) Deaths")
+                        Text("+\(api.globalTodayDeaths)")
+                            .font(.caption)
+                            .bold()
+                            .foregroundColor(.green)
+                        
+                    }
+                    .padding(.bottom, 5)
+                    
+                    Text("\(api.globalRecovered) Recovered")
+                }
+                .padding(20)
+                .background(Color.white)
+                .cornerRadius(20)
+                .shadow(radius: 20)
+                
+                ScrollView(.horizontal) {
+                    HStack(spacing: 30){
+                        Top5CardView(cardTitle: "Countries with the Most Number of Cases", property: "cases", top5: $api.top5Cases)
+                            .background(Color.white)
+                            .cornerRadius(20)
+                        Top5CardView(cardTitle: "Countries with the Most Number of Deaths", property: "deaths", top5: $api.top5Deaths)
+                            .background(Color.white)
+                            .cornerRadius(20)
+                        Top5CardView(cardTitle: "Countries with the Most Number of Recovered", property: "recovered", top5: $api.top5Recovered)
+                            .background(Color.white)
+                            .cornerRadius(20)
                     }
                 }
+                Spacer()
             }
             .frame(width: 360)
         }
@@ -104,7 +99,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView().environmentObject(Api())
     }
 }
 
@@ -118,6 +113,7 @@ struct Top5CardView: View {
             HStack {
                 Text(self.cardTitle)
                     .font(.headline)
+                    .fixedSize(horizontal: false, vertical: true)
                 Spacer()
             }
             .padding(.top, 20)

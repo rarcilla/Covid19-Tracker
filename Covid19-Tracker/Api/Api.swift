@@ -12,7 +12,7 @@ import Combine
 class Api: ObservableObject {
     private var baseUrlStr = "https://disease.sh/v2/"
     var global: Global?
-    var countries = [Country]()
+    @Published var countries = [Country]()
     var globalHistory: [String: [String:Int]]?
     @Published var globalCases = 0
     @Published var globalDeaths = 0
