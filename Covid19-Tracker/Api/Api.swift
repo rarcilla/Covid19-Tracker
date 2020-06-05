@@ -57,8 +57,7 @@ class Api: ObservableObject {
         
         getNewsArticles {
             DispatchQueue.main.async {
-                self.articles = self.newsFeed!.articles!
-                print(self.articles)
+                self.articles = self.newsFeed!.articles
             }
         }
     
@@ -228,7 +227,6 @@ class Api: ObservableObject {
                 do {
                     self.newsFeed = try decoder.decode(NewsFeed.self, from: data!)
                 } catch {
-                    print(error)
                     fatalError("error: failed to parse news articles")
                 }
                 completionHandler()

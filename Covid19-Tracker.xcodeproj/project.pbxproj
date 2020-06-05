@@ -16,6 +16,7 @@
 		7F1F96D8245FCD1B0088C312 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F1F96D6245FCD1B0088C312 /* LaunchScreen.storyboard */; };
 		7F1F96E2245FCD7B0088C312 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1F96E1245FCD7B0088C312 /* Country.swift */; };
 		7F1F96E4245FCD980088C312 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1F96E3245FCD980088C312 /* Api.swift */; };
+		7F2CB1B6248A2A690061440E /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = 7F2CB1B5248A2A690061440E /* URLImage */; };
 		7F45873F24773F430049144F /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F45873E24773F430049144F /* ChartView.swift */; };
 		7F51D4E52488B4A3005F3110 /* Flag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F51D4E42488B4A3005F3110 /* Flag.swift */; };
 		7F8E6054246006ED0062F734 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8E6053246006ED0062F734 /* Global.swift */; };
@@ -67,6 +68,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				822F34283E8AD4832A37C291 /* Pods_Covid19_Tracker.framework in Frameworks */,
+				7F2CB1B6248A2A690061440E /* URLImage in Frameworks */,
 				7F0000C62488A74A0077C404 /* SwiftUICharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -207,6 +209,7 @@
 			name = "Covid19-Tracker";
 			packageProductDependencies = (
 				7F0000C52488A74A0077C404 /* SwiftUICharts */,
+				7F2CB1B5248A2A690061440E /* URLImage */,
 			);
 			productName = "Covid19-Tracker";
 			productReference = 7F1F96C8245FCD180088C312 /* Covid19-Tracker.app */;
@@ -238,6 +241,7 @@
 			mainGroup = 7F1F96BF245FCD180088C312;
 			packageReferences = (
 				7F0000C42488A74A0077C404 /* XCRemoteSwiftPackageReference "ChartView" */,
+				7F2CB1B4248A2A690061440E /* XCRemoteSwiftPackageReference "url-image" */,
 			);
 			productRefGroup = 7F1F96C9245FCD180088C312 /* Products */;
 			projectDirPath = "";
@@ -531,6 +535,14 @@
 				minimumVersion = 1.5.0;
 			};
 		};
+		7F2CB1B4248A2A690061440E /* XCRemoteSwiftPackageReference "url-image" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dmytro-anokhin/url-image.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.15;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -538,6 +550,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7F0000C42488A74A0077C404 /* XCRemoteSwiftPackageReference "ChartView" */;
 			productName = SwiftUICharts;
+		};
+		7F2CB1B5248A2A690061440E /* URLImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7F2CB1B4248A2A690061440E /* XCRemoteSwiftPackageReference "url-image" */;
+			productName = URLImage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

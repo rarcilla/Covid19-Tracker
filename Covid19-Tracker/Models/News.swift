@@ -10,7 +10,7 @@ import Foundation
 import SwiftUI
 
 struct NewsFeed: Codable {
-    var articles: [Article]?
+    var articles: [Article]
     
     struct Article: Codable, Identifiable {
         var id = UUID()

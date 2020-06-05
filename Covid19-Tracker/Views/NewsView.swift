@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import URLImage
 
 struct NewsView: View {
     @EnvironmentObject var api: Api
@@ -24,6 +25,10 @@ struct NewsView: View {
             List(api.articles) { article in
                 ArticleRow(article: article)
             }
+            .onAppear {
+                UITableView.appearance().tableFooterView = UIView()
+                UITableView.appearance().separatorStyle = .none
+            }
         }
     }
 }
@@ -39,6 +44,9 @@ struct ArticleRow: View {
     
     var body: some View {
         VStack {
+            if URL(string: self.article.urlToImage ?? "") != nil {
+                URLImage(URL(string: self.article.urlToImage!)!)
+            }
             Text("\(article.title ?? "Headline unavailable")")
                 .font(.headline)
             Text("\(article.publishedAt ?? "Headline unavailable")")
