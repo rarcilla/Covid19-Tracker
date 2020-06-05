@@ -41,11 +41,11 @@ struct CountryDetailView: View {
                     self.api.countries[self.countryIndex].isFavorite.toggle()
                 }) {
                     if self.api.countries[self.countryIndex].isFavorite {
-                        Image(systemName: "star.fill")
+                        Image(systemName: "bookmark.fill")
                             .font(.title)
                             .foregroundColor(Color(red: 1.00, green: 0.27, blue: 0.31))
                     } else {
-                        Image(systemName: "star")
+                        Image(systemName: "bookmark")
                             .font(.title)
                             .foregroundColor(Color(red: 1.00, green: 0.27, blue: 0.31))
                     }

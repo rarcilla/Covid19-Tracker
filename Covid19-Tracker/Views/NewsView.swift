@@ -13,7 +13,7 @@ struct NewsView: View {
     var body: some View {
         VStack {
             HStack {
-                Text("Covid-19 Articles 📰")
+                Text("Latest Covid-19 Articles 📰")
                     .font(.largeTitle)
                     .fontWeight(.heavy)
                 Spacer()
@@ -22,7 +22,7 @@ struct NewsView: View {
             .padding(.bottom, 10)
             
             List(api.articles) { article in
-                Text("\(article.title!)")
+                ArticleRow(article: article)
             }
         }
     }
@@ -31,5 +31,32 @@ struct NewsView: View {
 struct NewsView_Previews: PreviewProvider {
     static var previews: some View {
         NewsView()
+    }
+}
+
+struct ArticleRow: View {
+    var article: NewsFeed.Article
+    
+    var body: some View {
+        VStack {
+            Text("\(article.title ?? "Headline unavailable")")
+                .font(.headline)
+            Text("\(article.publishedAt ?? "Headline unavailable")")
+            .font(.subheadline)
+            Text("\(article.description ?? "Description unavailable")")
+            HStack {
+                Text("\(article.source.name ?? "Source unavailable")")
+                Spacer()
+                Text("\(article.author ?? "Author unavailable")")
+            }
+            .font(.footnote)
+        }
+        .background(Color.blue)
+        .onTapGesture {
+            if let articleURL = self.article.url {
+                let url: NSURL = URL(string: articleURL)! as NSURL
+                UIApplication.shared.open(url as URL)
+            }
+        }
     }
 }

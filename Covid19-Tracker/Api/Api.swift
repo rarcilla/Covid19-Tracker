@@ -211,9 +211,10 @@ class Api: ObservableObject {
     }
     
     func getNewsArticles(completionHandler: @escaping () -> Void) {
-        let urlString = "https://newsapi.org/v2/top-headlines?q=covid-19&apiKey=\(newsApiKey)"
+        let query = "covid-19 OR coronavirus".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "covid-19"
+        let urlStr = "https://newsapi.org/v2/everything?q=\(query)&language=en&apiKey=\(newsApiKey)"
         
-        let url = URL(string: urlString)
+        let url = URL(string: urlStr)
         
         guard url != nil else {
             return

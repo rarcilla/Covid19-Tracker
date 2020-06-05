@@ -47,7 +47,7 @@ struct CountryRow: View {
             Text("\(country.countryName) \(getFlag(country: country))")
             Spacer()
             if country.isFavorite {
-                Image(systemName: "star.fill")
+                Image(systemName: "bookmark.fill")
                     .imageScale(.medium)
                     .foregroundColor(Color(red: 1.00, green: 0.27, blue: 0.31))
             }
