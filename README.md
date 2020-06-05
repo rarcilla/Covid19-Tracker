@@ -1,6 +1,6 @@
 # Covid19-Tracker
 
-A Covid19 Tracking app.
+A Covid19 Tracking app made with SwiftUI.
 
 ## Features:
 * A homepage displaying current global stats
