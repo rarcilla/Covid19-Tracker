@@ -20,11 +20,14 @@ struct NewsView: View {
                 Spacer()
             }
             .padding()
-            .padding(.bottom, 10)
             
-            List(api.articles) { article in
-                ArticleRow(article: article)
-                    .padding(.bottom, 30)
+            HStack {
+                Spacer()
+                List(api.articles) { article in
+                    ArticleRow(article: article)
+                        .padding(.bottom, 30)
+                }
+                Spacer()
             }
             .onAppear {
                 UITableView.appearance().tableFooterView = UIView()
