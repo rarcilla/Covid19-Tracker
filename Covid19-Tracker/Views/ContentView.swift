@@ -43,6 +43,7 @@ struct ContentView: View {
                 VStack {
                     HStack {
                         Text("\(api.globalCases) Cases")
+                            .foregroundColor(.black)
                         Text("+\(api.globalTodayCases)")
                             .font(.caption)
                             .bold()
@@ -52,6 +53,7 @@ struct ContentView: View {
                     
                     HStack {
                         Text("\(api.globalDeaths) Deaths")
+                            .foregroundColor(.black)
                         Text("+\(api.globalTodayDeaths)")
                             .font(.caption)
                             .bold()
@@ -61,6 +63,7 @@ struct ContentView: View {
                     .padding(.bottom, 5)
                     
                     Text("\(api.globalRecovered) Recovered")
+                        .foregroundColor(.black)
                 }
                 .padding(20)
                 .background(Color.white)

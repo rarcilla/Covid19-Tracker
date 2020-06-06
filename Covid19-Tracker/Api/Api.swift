@@ -138,7 +138,10 @@ class Api: ObservableObject {
             if data != nil && error == nil {
                 let decoder = JSONDecoder()
                 do {
-                    self.countries = try decoder.decode([Country].self, from: data!)
+                   let countries = try decoder.decode([Country].self, from: data!)
+                    DispatchQueue.main.async {
+                        self.countries = countries
+                    }
                 } catch {
                     print("error parsing country data: \(error)")
                 }

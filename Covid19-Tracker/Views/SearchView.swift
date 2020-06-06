@@ -29,6 +29,9 @@ struct SearchView: View {
             }
             .navigationBarTitle(Text("Browse Countries"))
         }
+        .onAppear {
+            UITableView.appearance().separatorStyle = .singleLine
+        }
     }
 }
 

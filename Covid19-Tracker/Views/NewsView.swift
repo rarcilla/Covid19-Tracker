@@ -14,7 +14,7 @@ struct NewsView: View {
     var body: some View {
         VStack {
             HStack {
-                Text("Latest Covid-19 Articles 📰")
+                Text("The Latest on Covid-19 📰")
                     .font(.largeTitle)
                     .fontWeight(.heavy)
                 Spacer()
@@ -24,10 +24,12 @@ struct NewsView: View {
             
             List(api.articles) { article in
                 ArticleRow(article: article)
+                    .padding(.bottom, 30)
             }
             .onAppear {
                 UITableView.appearance().tableFooterView = UIView()
                 UITableView.appearance().separatorStyle = .none
+                UITableView.appearance().showsVerticalScrollIndicator = false
             }
         }
     }
@@ -35,31 +37,98 @@ struct NewsView: View {
 
 struct NewsView_Previews: PreviewProvider {
     static var previews: some View {
-        NewsView()
+        NewsView().environmentObject(Api())
     }
 }
 
 struct ArticleRow: View {
     var article: NewsFeed.Article
     
-    var body: some View {
-        VStack {
+        @ViewBuilder var body: some View {
             if URL(string: self.article.urlToImage ?? "") != nil {
-                URLImage(URL(string: self.article.urlToImage!)!)
+                ArticleWithImage(article: self.article)
+            } else {
+                ArticleNoImage(article: self.article)
             }
-            Text("\(article.title ?? "Headline unavailable")")
-                .font(.headline)
-            Text("\(article.publishedAt ?? "Headline unavailable")")
-            .font(.subheadline)
-            Text("\(article.description ?? "Description unavailable")")
-            HStack {
-                Text("\(article.source.name ?? "Source unavailable")")
-                Spacer()
-                Text("\(article.author ?? "Author unavailable")")
-            }
-            .font(.footnote)
         }
-        .background(Color.blue)
+}
+
+struct ArticleWithImage: View {
+    var article: NewsFeed.Article
+    
+    var body: some View {
+        VStack() {
+                URLImage(URL(string: self.article.urlToImage!)!, delay: 1) { proxy in
+                    proxy.image
+                        .resizable()
+                        .aspectRatio(nil, contentMode: .fill)
+                        .frame(minWidth: 0, maxWidth: .infinity)
+                }
+            VStack(alignment: .leading, spacing: 10) {
+                    Text("\(article.title ?? "Headline unavailable")")
+                        .font(.headline)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .padding(.horizontal, 10)
+                    Text("June 22, 2020")
+                          .foregroundColor(.gray)
+                          .font(.subheadline)
+                          .padding(.leading, 10)
+                    Text("\((article.description != nil) ? article.description!.truncate(maxLength: 200) : "Description Unavailable")")
+                        .fixedSize(horizontal: false, vertical: true)
+                        .padding(.horizontal, 10)
+                    HStack {
+                        Spacer()
+                        Text("Source: \(article.source.name ?? "Unavailable")")
+                            .font(.footnote)
+                            .padding(.trailing, 10)
+                    }
+                }
+                .padding(.vertical, 15)
+            }
+            .foregroundColor(Color.black)
+            .background(Color.white)
+            .frame(width: 360)
+            .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+            .shadow(radius: 10)
+            .onTapGesture {
+                if let articleURL = self.article.url {
+                    let url: NSURL = URL(string: articleURL)! as NSURL
+                    UIApplication.shared.open(url as URL)
+                }
+        }
+    }
+}
+
+struct ArticleNoImage: View {
+    var article: NewsFeed.Article
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("\(article.title ?? "Headline Unavailable")")
+                .font(.headline)
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.horizontal, 10)
+            Text("June 22, 2020")
+                .foregroundColor(.gray)
+                .font(.subheadline)
+                .padding(.leading, 10)
+            Text("\((article.description != nil) ? article.description!.truncate(maxLength: 200) : "Description Unavailable")")
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.horizontal, 10)
+            HStack {
+                Spacer()
+                Text("Source: \(article.source.name ?? "Unavailable")")
+                    .font(.footnote)
+                    .padding(.trailing, 10)
+            }
+            .padding(.top, 20)
+        }
+        .padding(.vertical, 15)
+        .foregroundColor(Color.black)
+        .background(Color.white)
+        .frame(width: 360)
+        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+        .shadow(radius: 10)
         .onTapGesture {
             if let articleURL = self.article.url {
                 let url: NSURL = URL(string: articleURL)! as NSURL
@@ -68,3 +137,5 @@ struct ArticleRow: View {
         }
     }
 }
+
+
