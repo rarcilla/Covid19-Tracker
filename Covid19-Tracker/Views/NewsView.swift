@@ -61,72 +61,14 @@ struct ArticleWithImage: View {
     
     var body: some View {
         VStack() {
-                URLImage(URL(string: self.article.urlToImage!)!, delay: 1) { proxy in
-                    proxy.image
-                        .resizable()
-                        .aspectRatio(nil, contentMode: .fill)
-                        .frame(minWidth: 0, maxWidth: .infinity)
-                }
-            VStack(alignment: .leading, spacing: 10) {
-                    Text("\(article.title ?? "Headline unavailable")")
-                        .font(.headline)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .padding(.horizontal, 10)
-                    Text("June 22, 2020")
-                          .foregroundColor(.gray)
-                          .font(.subheadline)
-                          .padding(.leading, 10)
-                    Text("\((article.description != nil) ? article.description!.truncate(maxLength: 200) : "Description Unavailable")")
-                        .fixedSize(horizontal: false, vertical: true)
-                        .padding(.horizontal, 10)
-                    HStack {
-                        Spacer()
-                        Text("Source: \(article.source.name ?? "Unavailable")")
-                            .font(.footnote)
-                            .padding(.trailing, 10)
-                    }
-                }
-                .padding(.vertical, 15)
+            URLImage(URL(string: self.article.urlToImage!)!, delay: 1) { proxy in
+                proxy.image
+                    .resizable()
+                    .aspectRatio(nil, contentMode: .fill)
+                    .frame(minWidth: 0, maxWidth: .infinity)
             }
-            .foregroundColor(Color.black)
-            .background(Color.white)
-            .frame(width: 360)
-            .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-            .shadow(radius: 10)
-            .onTapGesture {
-                if let articleURL = self.article.url {
-                    let url: NSURL = URL(string: articleURL)! as NSURL
-                    UIApplication.shared.open(url as URL)
-                }
+            ArticleTextContent(article: article)
         }
-    }
-}
-
-struct ArticleNoImage: View {
-    var article: NewsFeed.Article
-    
-    var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text("\(article.title ?? "Headline Unavailable")")
-                .font(.headline)
-                .fixedSize(horizontal: false, vertical: true)
-                .padding(.horizontal, 10)
-            Text("June 22, 2020")
-                .foregroundColor(.gray)
-                .font(.subheadline)
-                .padding(.leading, 10)
-            Text("\((article.description != nil) ? article.description!.truncate(maxLength: 200) : "Description Unavailable")")
-                .fixedSize(horizontal: false, vertical: true)
-                .padding(.horizontal, 10)
-            HStack {
-                Spacer()
-                Text("Source: \(article.source.name ?? "Unavailable")")
-                    .font(.footnote)
-                    .padding(.trailing, 10)
-            }
-            .padding(.top, 20)
-        }
-        .padding(.vertical, 15)
         .foregroundColor(Color.black)
         .background(Color.white)
         .frame(width: 360)
@@ -141,4 +83,55 @@ struct ArticleNoImage: View {
     }
 }
 
+struct ArticleNoImage: View {
+    var article: NewsFeed.Article
+    
+    var body: some View {
+        ArticleTextContent(article: article)
+            .foregroundColor(Color.black)
+            .background(Color.white)
+            .frame(width: 360)
+            .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+            .shadow(radius: 10)
+            .onTapGesture {
+                if let articleURL = self.article.url {
+                    let url: NSURL = URL(string: articleURL)! as NSURL
+                    UIApplication.shared.open(url as URL)
+                }
+        }
+    }
+}
 
+
+struct ArticleTextContent: View {
+    var article: NewsFeed.Article
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("\(article.title ?? "Headline unavailable")")
+                .font(.headline)
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.horizontal, 10)
+            Text("June 22, 2020")
+                .foregroundColor(.gray)
+                .font(.subheadline)
+                .padding(.leading, 10)
+            Text("\((article.description != nil) ? article.description!.truncate(maxLength: 200) : "Description Unavailable")")
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.horizontal, 10)
+            HStack {
+                Text("\(article.author ?? "Author Unavailable")")
+                    .font(.footnote)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(.leading, 10)
+                Spacer()
+                Text("Source: \(article.source.name ?? "Unavailable")")
+                    .font(.footnote)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(.trailing, 10)
+            }
+            .padding(.top, 15)
+        }
+        .padding(.vertical, 15)
+    }
+}

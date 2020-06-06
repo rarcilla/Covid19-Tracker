@@ -154,7 +154,8 @@ struct Top5CardView: View {
         .foregroundColor(Color.white)
         .frame(width:300, height: 300.0)
         .background(Color(red: 0.27, green: 0.27, blue: 0.27))
-        .cornerRadius(20)
+        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+        .shadow(radius: 10)
     }
 }
 
