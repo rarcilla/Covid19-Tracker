@@ -11,6 +11,7 @@ import SwiftUI
 struct CountryDetailView: View {
     @EnvironmentObject var api: Api
     @EnvironmentObject var userData: UserData
+    @State var countryApi: CountryApi?
 
     var country: Country
     var countryIndex: Int {
@@ -18,17 +19,14 @@ struct CountryDetailView: View {
             $0.id == country.id
         })!
     }
-
-//    init(country: Country) {
-//        self.country = country
-//        self.api.getCountryHistory(iso: self.country.countryInfo.iso3!)
-//    }
+    
+    init(country: Country) {
+        self.country = country
+    }
     
     var body: some View {
         VStack {
 //            MapView(lat: country.countryInfo.lat, lon: country.countryInfo.long)
-//                .frame(height: 300)
-//            Rectangle()
 //                .frame(height: 300)
             HStack {
                 Text("\(country.countryName)")
@@ -79,9 +77,13 @@ struct CountryDetailView: View {
                         .font(.headline)
                 }
             }
-            Spacer()
+            ChartView()
         }
+        .onAppear(perform: {
+            self.countryApi = CountryApi(country: self.country)
+        })
     }
+
 }
 
 struct CountryDetailView_Previews: PreviewProvider {

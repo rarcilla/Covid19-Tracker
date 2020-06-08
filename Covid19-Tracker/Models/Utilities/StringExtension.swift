@@ -22,4 +22,18 @@ extension String {
         
         return truncated + trailing
     }
+    
+
+    func toDate() -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yy"
+        
+        guard let date = dateFormatter.date(from: self) else {
+            return nil
+        }
+
+        return date
+    }
+
+    
 }

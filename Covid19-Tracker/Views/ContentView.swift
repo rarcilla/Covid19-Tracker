@@ -10,91 +10,21 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var api: Api
-    @State var currentDateAndTime = Date()
     
     var body: some View {
         ZStack {
-            VStack {
-                Image("blob")
-                    .offset(y: -330)
-                Spacer()
-            }
-            
+            BackgroundImageView()
+
             VStack(spacing: 50) {
-                VStack {
-                    HStack {
-                        Text("Global Statistics 🌎")
-                            .font(.largeTitle)
-                            .fontWeight(.heavy)
-                            .foregroundColor(.white)
-                        Spacer()
-                    }
-                    HStack {
-                        Text("As of \(formatDate())")
-                            .font(.headline)
-                            .foregroundColor(.white)
-                            .padding(.top, 5)
-                            .padding(.bottom, 15.0)
-                        Spacer()
-                    }
-                }
-                .padding(.top, 80)
+                HeaderTextView()
                 
-                VStack {
-                    HStack {
-                        Text("\(api.globalCases) Cases")
-                            .foregroundColor(.black)
-                        Text("+\(api.globalTodayCases)")
-                            .font(.caption)
-                            .bold()
-                            .foregroundColor(.green)
-                    }
-                    .padding(.bottom, 5)
-                    
-                    HStack {
-                        Text("\(api.globalDeaths) Deaths")
-                            .foregroundColor(.black)
-                        Text("+\(api.globalTodayDeaths)")
-                            .font(.caption)
-                            .bold()
-                            .foregroundColor(.green)
-                        
-                    }
-                    .padding(.bottom, 5)
-                    
-                    Text("\(api.globalRecovered) Recovered")
-                        .foregroundColor(.black)
-                }
-                .padding(20)
-                .background(Color.white)
-                .cornerRadius(20)
-                .shadow(radius: 20)
+                GlobalSummaryView()
                 
-                ScrollView(.horizontal) {
-                    HStack(spacing: 30){
-                        Top5CardView(cardTitle: "Countries with the Most Number of Cases", property: "cases", top5: $api.top5Cases)
-                            .background(Color.white)
-                            .cornerRadius(20)
-                        Top5CardView(cardTitle: "Countries with the Most Number of Deaths", property: "deaths", top5: $api.top5Deaths)
-                            .background(Color.white)
-                            .cornerRadius(20)
-                        Top5CardView(cardTitle: "Countries with the Most Number of Recovered", property: "recovered", top5: $api.top5Recovered)
-                            .background(Color.white)
-                            .cornerRadius(20)
-                    }
-                }
+                Top5CardList()
+                
                 Spacer()
             }
-            .frame(width: 360)
         }
-    }
- 
-    fileprivate func formatDate() -> String {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .long
-        formatter.timeStyle = .short
-        
-        return formatter.string(from: self.currentDateAndTime)
     }
 }
 
@@ -108,6 +38,7 @@ struct ContentView_Previews: PreviewProvider {
 struct Top5CardView: View {
     var cardTitle: String
     var property: String
+    var placeholderText: String = "loading..."
     @Binding var top5: [Country]
     
     var body: some View {
@@ -121,45 +52,43 @@ struct Top5CardView: View {
             .padding(.top, 20)
             .padding(.horizontal, 20)
             VStack {
-                Top5CardViewCell(rank: 1, countryName: top5.count > 0 ? top5[0].countryName : "loading...",
-                                 countryNumbers: top5.count > 0 ? top5[0].numbersByPropertyName(name: property) : 0,
-                                 countryFlag: top5.count > 0 ? getFlag(country: top5[0]) : "")
-                
-                FormattedDivider()
-                
-                Top5CardViewCell(rank: 2, countryName: top5.count > 0 ? top5[1].countryName : "loading...",
-                                 countryNumbers: top5.count > 0 ? top5[1].numbersByPropertyName(name: property) : 0,
-                                 countryFlag: top5.count > 0 ? getFlag(country: top5[1]) : "")
-                
-                FormattedDivider()
-                
-                Top5CardViewCell(rank: 3, countryName: top5.count > 0 ? top5[2].countryName : "loading...",
-                                 countryNumbers: top5.count > 0 ? top5[2].numbersByPropertyName(name: property) : 0,
-                                 countryFlag: top5.count > 0 ? getFlag(country: top5[2]) : "")
-                
-                FormattedDivider()
-                
-                Top5CardViewCell(rank: 4, countryName: top5.count > 0 ? top5[3].countryName : "loading...",
-                                 countryNumbers: top5.count > 0 ? top5[3].numbersByPropertyName(name: property) : 0,
-                                 countryFlag: top5.count > 0 ? getFlag(country: top5[3]) : "")
-                
-                FormattedDivider()
-                
-                Top5CardViewCell(rank: 5, countryName: top5.count > 0 ? top5[4].countryName : "loading...",
-                                 countryNumbers: top5.count > 0 ? top5[4].numbersByPropertyName(name: property) : 0,
-                                 countryFlag: top5.count > 0 ? getFlag(country: top5[4]) : "")
+                if top5.count > 0 {
+                    ForEach(0..<top5.count) { index in
+                        Top5CardViewCell(rank: index+1,
+                                         countryName: self.top5[index].countryName,
+                                         countryNumbers: self.top5[index].numbersByPropertyName(name: self.property),
+                                         countryFlag: getFlag(country: self.top5[index]))
+                        if index != 4 {
+                            FormattedDivider()
+                        }
+                    }
+                } else {
+                    Text("")
+                        .frame(width: 0, height: 0)
+                    ForEach(0..<5) { index in
+                        Top5CardViewCell(rank: index+1,
+                                         countryName: "loading...",
+                                         countryNumbers: 0,
+                                         countryFlag: "")
+                        if index != 4 {
+                            FormattedDivider()
+                        }
+                    }
+                }
             }
             .padding(20)
         }
         .foregroundColor(Color.white)
         .frame(width:300, height: 300.0)
         .background(Color(red: 0.27, green: 0.27, blue: 0.27))
-        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-        .shadow(radius: 10)
+        .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+        .shadow(radius: 20)
+        .cornerRadius(20)
     }
 }
 
 struct FormattedDivider: View {
+    
     var body: some View {
         VStack {
             Divider()
@@ -187,5 +116,107 @@ struct Top5CardViewCell: View {
     }
 }
 
+struct BackgroundImageView: View {
+    
+    var body: some View {
+        VStack {
+            GeometryReader { geo in
+                Image("blob")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: geo.size.width)
+            }
+            .offset(y: -375)
+        }
+    }
+}
 
+struct HeaderTextView: View {
+    @EnvironmentObject var api: Api
+    @State var currentDateAndTime = Date()
+    
+    var body: some View {
+        VStack(spacing: 15) {
+            HStack {
+                Text("Global Statistics 🌎")
+                    .font(.largeTitle)
+                    .fontWeight(.heavy)
+                    .foregroundColor(.white)
+                Spacer()
+            }
+            HStack(alignment: .firstTextBaseline) {
+                Text("As of \(formatDate())")
+                    .font(.headline)
+                    .foregroundColor(.white)
+                Spacer()
+                Button(action: {
+                    self.api.updateGlobal()
+                }, label: {
+                    Image(systemName: "arrow.clockwise")
+                })
+                    .foregroundColor(.white)
+            }
+        }
+        .padding(20)
+    }
+    
+    fileprivate func formatDate() -> String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        formatter.timeStyle = .short
+        
+        return formatter.string(from: self.currentDateAndTime)
+    }
+}
 
+struct GlobalSummaryView: View {
+    @EnvironmentObject var api: Api
+
+    var body: some View {
+        VStack {
+            HStack {
+                Text("\(api.globalCases) Cases")
+                    .foregroundColor(.black)
+                Text("+\(api.globalTodayCases)")
+                    .font(.caption)
+                    .bold()
+                    .foregroundColor(.green)
+            }
+            .padding(.bottom, 5)
+            
+            HStack {
+                Text("\(api.globalDeaths) Deaths")
+                    .foregroundColor(.black)
+                Text("+\(api.globalTodayDeaths)")
+                    .font(.caption)
+                    .bold()
+                    .foregroundColor(.green)
+            }
+            .padding(.bottom, 5)
+            
+            Text("\(api.globalRecovered) Recovered")
+                .foregroundColor(.black)
+        }
+        .padding(20)
+        .background(Color.white)
+        .cornerRadius(20)
+        .shadow(radius: 20)
+    }
+}
+
+struct Top5CardList: View {
+    @EnvironmentObject var api: Api
+
+    var body: some View {
+        ScrollView(.horizontal) {
+            HStack(spacing: 30){
+                Top5CardView(cardTitle: "Countries with the Most Number of Cases", property: "cases", top5: $api.top5Cases)
+
+                Top5CardView(cardTitle: "Countries with the Most Number of Deaths", property: "deaths", top5: $api.top5Deaths)
+
+                Top5CardView(cardTitle: "Countries with the Most Number of Recovered", property: "recovered", top5: $api.top5Recovered)
+            }
+        }
+        .frame(width: 385)
+    }
+}
