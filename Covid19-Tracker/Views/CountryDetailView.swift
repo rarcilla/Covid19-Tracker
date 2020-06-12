@@ -11,7 +11,7 @@ import SwiftUI
 struct CountryDetailView: View {
     @EnvironmentObject var api: Api
     @EnvironmentObject var userData: UserData
-    @State var countryApi: CountryApi?
+    @ObservedObject var countryApi = CountryApi()
 
     var country: Country
     var countryIndex: Int {
@@ -26,13 +26,10 @@ struct CountryDetailView: View {
     
     var body: some View {
         VStack {
-//            MapView(lat: country.countryInfo.lat, lon: country.countryInfo.long)
-//                .frame(height: 300)
             HStack {
                 Text("\(country.countryName)")
                     .font(.largeTitle)
                     .fontWeight(.semibold)
-                    .padding(.vertical)
                     .padding(.horizontal, 30)
                 Spacer()
                 Button(action: {
@@ -48,8 +45,9 @@ struct CountryDetailView: View {
                             .foregroundColor(Color(red: 1.00, green: 0.27, blue: 0.31))
                     }
                 }
-                    .padding(.trailing, 30)
+                .padding(.trailing, 30)
             }
+            
             VStack(alignment: .leading, spacing: 15) {
                 HStack {
                     Text("\(country.cases ?? 0)")
@@ -77,22 +75,21 @@ struct CountryDetailView: View {
                         .font(.headline)
                 }
             }
-            ChartView()
+            
         }
-        .onAppear(perform: {
-            self.countryApi = CountryApi(country: self.country)
-        })
-    }
-
-}
-
-struct CountryDetailView_Previews: PreviewProvider {
-
-    static var previews: some View {
-        CountryDetailView(country: testCountry).environmentObject(Api())
+//        .onAppear {
+//            self.countryApi.getCountryHistory(country: self.country, completionHandler: self.countryApi.getCountryHistoryCompletion)
+//        }
     }
 }
 
-
-var testCountry = Country(countryName: "testing", countryInfo: Country.CountryInfo(countryInfoID: nil, iso3: "test", lat: 34.011286, long: -116.166868, flag: "testflag"))
+//struct CountryDetailView_Previews: PreviewProvider {
+//
+//    static var previews: some View {
+//        CountryDetailView(country: testCountry).environmentObject(Api())
+//    }
+//}
+//
+//
+//var testCountry = Country(countryName: "testing", countryInfo: Country.CountryInfo(countryInfoID: nil, iso3: "test", lat: 34.011286, long: -116.166868, flag: "testflag"))
 

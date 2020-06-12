@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7F0000C62488A74A0077C404 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 7F0000C52488A74A0077C404 /* SwiftUICharts */; };
 		7F1F96CC245FCD180088C312 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1F96CB245FCD180088C312 /* AppDelegate.swift */; };
 		7F1F96CE245FCD180088C312 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1F96CD245FCD180088C312 /* SceneDelegate.swift */; };
 		7F1F96D0245FCD180088C312 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1F96CF245FCD180088C312 /* ContentView.swift */; };
@@ -75,7 +74,6 @@
 			files = (
 				822F34283E8AD4832A37C291 /* Pods_Covid19_Tracker.framework in Frameworks */,
 				7F2CB1B6248A2A690061440E /* URLImage in Frameworks */,
-				7F0000C62488A74A0077C404 /* SwiftUICharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -217,7 +215,6 @@
 			);
 			name = "Covid19-Tracker";
 			packageProductDependencies = (
-				7F0000C52488A74A0077C404 /* SwiftUICharts */,
 				7F2CB1B5248A2A690061440E /* URLImage */,
 			);
 			productName = "Covid19-Tracker";
@@ -249,7 +246,6 @@
 			);
 			mainGroup = 7F1F96BF245FCD180088C312;
 			packageReferences = (
-				7F0000C42488A74A0077C404 /* XCRemoteSwiftPackageReference "ChartView" */,
 				7F2CB1B4248A2A690061440E /* XCRemoteSwiftPackageReference "url-image" */,
 			);
 			productRefGroup = 7F1F96C9245FCD180088C312 /* Products */;
@@ -539,14 +535,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		7F0000C42488A74A0077C404 /* XCRemoteSwiftPackageReference "ChartView" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/AppPear/ChartView";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.5.0;
-			};
-		};
 		7F2CB1B4248A2A690061440E /* XCRemoteSwiftPackageReference "url-image" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/dmytro-anokhin/url-image.git";
@@ -558,11 +546,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		7F0000C52488A74A0077C404 /* SwiftUICharts */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 7F0000C42488A74A0077C404 /* XCRemoteSwiftPackageReference "ChartView" */;
-			productName = SwiftUICharts;
-		};
 		7F2CB1B5248A2A690061440E /* URLImage */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 7F2CB1B4248A2A690061440E /* XCRemoteSwiftPackageReference "url-image" */;

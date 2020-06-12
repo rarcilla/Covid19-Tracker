@@ -134,6 +134,7 @@ struct BackgroundImageView: View {
 struct HeaderTextView: View {
     @EnvironmentObject var api: Api
     @State var currentDateAndTime = Date()
+    @State var spin = false
     
     var body: some View {
         VStack(spacing: 15) {
@@ -144,15 +145,22 @@ struct HeaderTextView: View {
                     .foregroundColor(.white)
                 Spacer()
             }
-            HStack(alignment: .firstTextBaseline) {
+            HStack(alignment: .center) {
                 Text("As of \(formatDate())")
                     .font(.headline)
                     .foregroundColor(.white)
                 Spacer()
                 Button(action: {
                     self.api.updateGlobal()
+                    self.currentDateAndTime = Date()
+                    self.spin.toggle()
                 }, label: {
                     Image(systemName: "arrow.clockwise")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 20, height: 20)
+                    .rotationEffect(.degrees(spin ? 360 : 0))
+                    .animation(.easeInOut(duration: 2))
                 })
                     .foregroundColor(.white)
             }
