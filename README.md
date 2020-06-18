@@ -8,7 +8,7 @@ A Covid19 Tracking app made with SwiftUI.
 * Browse top 20 news articles related to Covid19.
 
 ## Technologies Used:
-SwiftUI, [NovelCOVID API](https://github.com/NovelCovid/API), [NewsAPI](https://newsapi.org/), [URLImage](https://github.com/dmytro-anokhin/url-image), [IsoCountryCodes for Swift](https://github.com/funky-monkey/IsoCountryCodes).
+SwiftUI 1.0, [NovelCOVID API](https://github.com/NovelCovid/API), [NewsAPI](https://newsapi.org/), [URLImage](https://github.com/dmytro-anokhin/url-image), [IsoCountryCodes for Swift](https://github.com/funky-monkey/IsoCountryCodes).
 
 ## Attributions
 App icon and launch screen icon made by [Freepik](https://www.flaticon.com/authors/freepik) from [Flaticon](www.flaticon.com).
