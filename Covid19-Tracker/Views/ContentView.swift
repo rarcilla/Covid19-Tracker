@@ -160,7 +160,7 @@ struct HeaderTextView: View {
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 20, height: 20)
                     .rotationEffect(.degrees(spin ? 360 : 0))
-                    .animation(.easeInOut(duration: 2))
+                    .animation(.easeInOut(duration: 0.75))
                 })
                     .foregroundColor(.white)
             }

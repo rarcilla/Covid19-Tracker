@@ -73,15 +73,6 @@ class CountryApi: ObservableObject {
         var processedResult = [(Date, Int)]()
         guard array.count > 0 else { return processedResult }
         
-//        for index in 0...array.count - 1 {
-//            if index == 0 {
-//                processedResult.append((array[index].0, array[index].1))
-//            } else {
-//                let new = array[index].1 - array[index - 1].1
-//                processedResult.append((array[index].0, new))
-//            }
-//        }
-        
         for index in 1...array.count - 1 {
             let new = array[index].1 - array[index - 1].1
             processedResult.append((array[index].0, new))

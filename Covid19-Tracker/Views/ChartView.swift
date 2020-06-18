@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-import Charts
+
 
 struct ChartView: View {
     var barValues: [(Date, Int)]

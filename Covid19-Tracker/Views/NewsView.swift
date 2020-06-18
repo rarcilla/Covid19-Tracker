@@ -112,7 +112,7 @@ struct ArticleTextContent: View {
                 .font(.headline)
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.horizontal, 10)
-            Text("June 22, 2020")
+            Text("\(article.publishedAt?.convertToStringDate() ?? "")")
                 .foregroundColor(.gray)
                 .font(.subheadline)
                 .padding(.leading, 10)
