@@ -25,6 +25,7 @@
 		7FB7C4E02488BBA700CDEEAC /* NewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB7C4DF2488BBA700CDEEAC /* NewsView.swift */; };
 		7FB7C4E22488C22500CDEEAC /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB7C4E12488C22500CDEEAC /* News.swift */; };
 		7FB7C4E42488C5DE00CDEEAC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB7C4E32488C5DE00CDEEAC /* Constants.swift */; };
+		7FBF67AF249C888700BDAFF0 /* appIconImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FBF67AE249C888700BDAFF0 /* appIconImage.png */; };
 		7FC19F9624887081000AD23B /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC19F9524887081000AD23B /* UserData.swift */; };
 		7FCB0779246F934F0013A143 /* IsoCountries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCB0778246F934F0013A143 /* IsoCountries.swift */; };
 		7FCB077B246F93680013A143 /* IsoCountryCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCB077A246F93680013A143 /* IsoCountryCodes.swift */; };
@@ -55,6 +56,7 @@
 		7FB7C4DF2488BBA700CDEEAC /* NewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsView.swift; sourceTree = "<group>"; };
 		7FB7C4E12488C22500CDEEAC /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
 		7FB7C4E32488C5DE00CDEEAC /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		7FBF67AE249C888700BDAFF0 /* appIconImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = appIconImage.png; sourceTree = "<group>"; };
 		7FC19F9524887081000AD23B /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		7FCB0778246F934F0013A143 /* IsoCountries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsoCountries.swift; sourceTree = "<group>"; };
 		7FCB077A246F93680013A143 /* IsoCountryCodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsoCountryCodes.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 		7F1D70AC249C1003003D0FC3 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				7FBF67AE249C888700BDAFF0 /* appIconImage.png */,
 				7F1D70AF249C12AD003D0FC3 /* appImages.JPG */,
 			);
 			path = Images;
@@ -259,6 +262,7 @@
 				7F1F96D5245FCD1B0088C312 /* Preview Assets.xcassets in Resources */,
 				7F1D70B0249C12AD003D0FC3 /* appImages.JPG in Resources */,
 				7F1F96D2245FCD1B0088C312 /* Assets.xcassets in Resources */,
+				7FBF67AF249C888700BDAFF0 /* appIconImage.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
